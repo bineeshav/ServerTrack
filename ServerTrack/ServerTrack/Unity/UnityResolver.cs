@@ -5,6 +5,9 @@ using Microsoft.Practices.Unity;
 
 namespace ServerTrack.Unity
 {
+    /// <summary>
+    /// UnityResolver class
+    /// </summary>
     public class UnityResolver : IDependencyResolver
     {
         protected IUnityContainer Container;

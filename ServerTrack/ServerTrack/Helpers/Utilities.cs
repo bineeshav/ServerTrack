@@ -5,6 +5,9 @@ using System.Web;
 
 namespace ServerTrack.Helpers
 {
+    /// <summary>
+    /// Class for utility methods
+    /// </summary>
     public class Utilities
     {
         /// <summary>
