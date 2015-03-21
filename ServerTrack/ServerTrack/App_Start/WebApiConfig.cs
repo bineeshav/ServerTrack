@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Microsoft.Practices.Unity;
+using ServerTrack.Interfaces;
+using ServerTrack.Models;
+using ServerTrack.Unity;
 
 namespace ServerTrack
 {
@@ -9,9 +13,6 @@ namespace ServerTrack
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
-
-            // Web API routes
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
@@ -19,6 +20,10 @@ namespace ServerTrack
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            var container = new UnityContainer();
+            container.RegisterType<IServerDataRepository, ServerDataMemoryRepository>(new HierarchicalLifetimeManager());
+            config.DependencyResolver = new UnityResolver(container);
         }
     }
 }
