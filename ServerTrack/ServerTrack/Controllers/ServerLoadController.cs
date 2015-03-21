@@ -13,6 +13,10 @@ namespace ServerTrack.Controllers
     {
         private IServerDataRepository _serverDataRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ServerLoadController"/> class.
+        /// </summary>
+        /// <param name="serverDataRepository">The server data repository.</param>
         public ServerLoadController(IServerDataRepository serverDataRepository)
         {
             this._serverDataRepository = serverDataRepository;

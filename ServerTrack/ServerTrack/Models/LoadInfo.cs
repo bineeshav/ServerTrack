@@ -15,9 +15,9 @@ namespace ServerTrack.Models
 
         public DateTime DateTime { get; set; }
 
-        public int CpuLoad { get; set; }
+        public double CpuLoad { get; set; }
 
-        public int MemoryLoad { get; set; }
+        public double MemoryLoad { get; set; }
 
         public LoadInfo(string serverName, DateTime dateTime, int cpuLoad, int memoryLoad)
         {

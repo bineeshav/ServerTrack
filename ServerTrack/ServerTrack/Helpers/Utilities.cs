@@ -14,10 +14,10 @@ namespace ServerTrack.Helpers
         /// <param name="numberOfCurrentDataPoints">The number of current data points.</param>
         /// <param name="newDataPoint">The new data point.</param>
         /// <returns></returns>
-        public static int GetAverage(int currentAverage, int numberOfCurrentDataPoints, int newDataPoint)
+        public static double GetAverage(double currentAverage, double numberOfCurrentDataPoints, double newDataPoint)
         {
-            decimal currentSum =  Convert.ToDecimal(currentAverage) * numberOfCurrentDataPoints;
-            int average = Convert.ToInt32((currentSum + newDataPoint) / (numberOfCurrentDataPoints + 1));
+            double currentSum =  currentAverage * numberOfCurrentDataPoints;
+            double average = (currentSum + newDataPoint)/(numberOfCurrentDataPoints + 1);
             return average;
         }
     }

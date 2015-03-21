@@ -12,9 +12,9 @@ namespace ServerTrack.Models
     {
         public DateTime DateTime { get; set; }
 
-        public int AverageCpuLoad { get; set; }
+        public double AverageCpuLoad { get; set; }
 
-        public int AverageMemoryLoad { get; set; }
+        public double AverageMemoryLoad { get; set; }
 
         public int NumberOfDataPoints { get; set; }
 
