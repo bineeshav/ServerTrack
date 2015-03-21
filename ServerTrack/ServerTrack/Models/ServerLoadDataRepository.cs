@@ -43,10 +43,12 @@ namespace ServerTrack.Models
         /// <returns></returns>
         public ServerLoadReport GetServerLoadStatistics(string serverName)
         {
-            var report = new ServerLoadReport();
-            report.ServerName = serverName;
+            var report = new ServerLoadReport {ServerName = serverName};
+
             if (_serverDataDictionary.ContainsKey(serverName))
             {
+                #region collect averages by minute
+
                 IEnumerable<KeyValuePair<DateTime, AverageLoad>> minuteAverages =
                     _serverDataDictionary[serverName].AverageByMinutes.Where(x => x.Key > DateTime.Now.AddMinutes(-60));
                 foreach (var item in minuteAverages)
@@ -54,6 +56,9 @@ namespace ServerTrack.Models
                     report.AverageLoadByMinutes.Add(item.Value);
                 }
 
+                #endregion collect averages by minute
+
+                #region collect averages by hour
 
                 IEnumerable<KeyValuePair<DateTime, AverageLoad>> hourlyAverages =
                     _serverDataDictionary[serverName].AverageByMinutes.Where(x => x.Key > DateTime.Now.AddHours(-24));
@@ -68,6 +73,8 @@ namespace ServerTrack.Models
                         AverageMemoryLoad = memoryLoadAverage
                     });
                 }
+
+                #endregion collect averages by hour
             }
             return report;
         }
