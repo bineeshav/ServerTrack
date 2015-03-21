@@ -55,10 +55,15 @@ namespace ServerTrack.Models
                 InitializeMinute(minute);
             }
 
-            AverageLoad averageLoad = this._AverageLoadByMinutes[minute] as AverageLoad;
-            averageLoad.AverageCpuLoad = Utilities.GetAverage(averageLoad.AverageCpuLoad, averageLoad.NumberOfDataPoints, loadInfo.CpuLoad);
-            averageLoad.AverageMemoryLoad = Utilities.GetAverage(averageLoad.AverageMemoryLoad, averageLoad.NumberOfDataPoints, loadInfo.MemoryLoad);
-            ++averageLoad.NumberOfDataPoints;
+            lock (_serverName)
+            {
+                AverageLoad averageLoad = this._AverageLoadByMinutes[minute] as AverageLoad;
+                averageLoad.AverageCpuLoad = Utilities.GetAverage(averageLoad.AverageCpuLoad,
+                    averageLoad.NumberOfDataPoints, loadInfo.CpuLoad);
+                averageLoad.AverageMemoryLoad = Utilities.GetAverage(averageLoad.AverageMemoryLoad,
+                    averageLoad.NumberOfDataPoints, loadInfo.MemoryLoad);
+                ++averageLoad.NumberOfDataPoints;
+            }
         }
 
         /// <summary>
